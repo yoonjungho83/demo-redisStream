@@ -1,0 +1,39 @@
+server:
+  port: 9000    
+
+spring: 
+  application:
+    name: demoMongo
+
+  data:  
+    mongodb:
+      host: 127.0.0.1
+      port: 37017
+      authentication-database: admin
+      username: root  #local은 설정 없음
+      password: 1219  #local은 설정 없음
+      database: demo-db
+      isActive: true
+       
+      auto-index-creation: true # 몽고DB의 unique index 사용시 설정    
+      
+    redis:
+      host: 127.0.0.1
+      port: 16379  
+      
+#  jpa:
+#    hibernate:
+#      ddl-auto: none
+#      use-new-id-generator-mappings: true
+#    show-sql: true
+#    properties:
+#      hibernate.dialect: org.hibernate.dialect.MySQL55Dialect    
+    
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb: INFO
+#            core:
+#              MongoTemplate: INFO
