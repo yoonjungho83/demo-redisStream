@@ -65,10 +65,12 @@ public class RedisStreamConsumer implements StreamListener<String ,MapRecord<Str
 	public void onMessage(MapRecord<String, Object, Object> message) {
 		// TODO Auto-generated method stub
 		/* message.getRequiredStream() : stream key
-		 * message.getStream() : stream key
+		 * message.getStream() : stream key 
 		 * 
 		 * */
 		log.info("onMessage = {} / {} / {} / {} ",message.getValue() , message.getRequiredStream() , message.getId() , message.getStream());
+		
+		//비즈니스 로직 처리  보통 ws로 client에 전송 해줌.
 		
 		redisOperator.ackStream(consumerGroupName, message);
 	}
