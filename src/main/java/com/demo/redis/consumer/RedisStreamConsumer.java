@@ -26,7 +26,7 @@ public class RedisStreamConsumer implements StreamListener<String ,MapRecord<Str
 	private final RedisOperator redisOperator;
 	
 	
-	private Subscription subscription1; 
+	private Subscription subscription; 
 	private StreamMessageListenerContainer<String , MapRecord<String ,Object, Object>> listenerContainer;
 	
 	
@@ -40,12 +40,12 @@ public class RedisStreamConsumer implements StreamListener<String ,MapRecord<Str
 		
 		listenerContainer = redisOperator.createStreamMessageListenerContainer();
 		
-		subscription1 = listenerContainer.receive(
+		subscription = listenerContainer.receive(
 				Consumer.from(consumerGroupName, consumerName),
 				StreamOffset.create(streamKey, ReadOffset.lastConsumed()),
 				this
 				);
-		subscription1.await(Duration.ofSeconds(2));
+		subscription.await(Duration.ofSeconds(2));
 		
 		
 		listenerContainer.start();
@@ -58,7 +58,7 @@ public class RedisStreamConsumer implements StreamListener<String ,MapRecord<Str
 		if(listenerContainer != null)  listenerContainer.stop();
 	}
 	public void stopSubscription1() {
-		if(subscription1 != null)  subscription1.cancel();
+		if(subscription != null)  subscription.cancel();
 	}
 	
 	@Override
